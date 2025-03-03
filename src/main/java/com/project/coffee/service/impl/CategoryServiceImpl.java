@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,6 +24,7 @@ public class CategoryServiceImpl implements CategoryService {
      *
      * @return a list of CategoryDTO objects representing all categories
      */
+    @Override
     public List<CategoryDTO> getAllCategories() {
         List<Category> categories = categoryRepository.findAll();
         return categories.stream()
@@ -34,13 +36,12 @@ public class CategoryServiceImpl implements CategoryService {
      * Retrieves a category by its ID from the database.
      *
      * @param categoryId the ID of the category to retrieve
-     * @return a CategoryDTO object representing the category with the given ID
-     * @throws ResourceNotFoundException if the category with the given ID is not found
+     * @return an Optional containing the CategoryDTO object if found, empty otherwise
      */
-    public CategoryDTO getCategoryById(Integer categoryId) {
-        Category category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new ResourceNotFoundException("Category not found with ID: " + categoryId));
-        return convertToDTO(category);
+    @Override
+    public Optional<CategoryDTO> getCategoryById(Integer categoryId) {
+        return categoryRepository.findById(categoryId)
+                .map(this::convertToDTO);
     }
 
     /**
@@ -50,6 +51,7 @@ public class CategoryServiceImpl implements CategoryService {
      * @return a CategoryDTO object representing the newly created category
      * @throws BadRequestException if the category creation fails
      */
+    @Override
     public CategoryDTO createCategory(CategoryDTO categoryDTO) {
         if (categoryDTO.getName() == null || categoryDTO.getName().trim().isEmpty()) {
             throw new BadRequestException("Category name is required");
@@ -67,6 +69,7 @@ public class CategoryServiceImpl implements CategoryService {
      * @return a CategoryDTO object representing the updated category
      * @throws ResourceNotFoundException if the category with the given ID is not found
      */
+    @Override
     public CategoryDTO updateCategory(Integer categoryId, CategoryDTO categoryDTO) {
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found with ID: " + categoryId));
@@ -82,6 +85,7 @@ public class CategoryServiceImpl implements CategoryService {
      * @param categoryId the ID of the category to delete
      * @throws ResourceNotFoundException if the category with the given ID is not found
      */
+    @Override
     public void deleteCategory(Integer categoryId) {
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found with ID: " + categoryId));
@@ -89,7 +93,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     /**
-     * Converts a Category entity to a CategoryDTO.
+     * Converts a Category entity to a CategoryDTO object.
      *
      * @param category the Category entity to convert
      * @return a CategoryDTO object representing the given Category entity
@@ -106,7 +110,7 @@ public class CategoryServiceImpl implements CategoryService {
     /**
      * Converts a CategoryDTO object to a Category entity.
      *
-     * @param dto the CategoryDTO to convert
+     * @param dto the CategoryDTO object to convert
      * @return a Category entity representing the given CategoryDTO
      */
     private Category convertToEntity(CategoryDTO dto) {

@@ -3,6 +3,7 @@ package com.project.coffee.service;
 import com.project.coffee.dto.CategoryDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CategoryService {
 
@@ -17,10 +18,9 @@ public interface CategoryService {
      * Retrieves a category by its ID from the database.
      *
      * @param categoryId the ID of the category to retrieve
-     * @return a CategoryDTO object representing the category with the given ID
-     * @throws com.project.coffee.exception.ResourceNotFoundException if the category with the given ID is not found
+     * @return an Optional containing the CategoryDTO object if found, empty otherwise
      */
-    CategoryDTO getCategoryById(Integer categoryId);
+    Optional<CategoryDTO> getCategoryById(Integer categoryId);
 
     /**
      * Creates a new category and stores it in the database.

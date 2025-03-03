@@ -1,4 +1,4 @@
-package com.project.coffee.entity;
+package com.project.coffee.entity.order;
 
 
 import jakarta.persistence.*;

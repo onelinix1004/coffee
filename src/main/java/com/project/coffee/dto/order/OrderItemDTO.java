@@ -1,4 +1,4 @@
-package com.project.coffee.dto;
+package com.project.coffee.dto.order;
 
 
 import java.math.BigDecimal;

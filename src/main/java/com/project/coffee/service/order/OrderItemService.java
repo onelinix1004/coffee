@@ -1,7 +1,7 @@
-package com.project.coffee.service;
+package com.project.coffee.service.order;
 
 
-import com.project.coffee.dto.OrderItemDTO;
+import com.project.coffee.dto.order.OrderItemDTO;
 
 import java.util.List;
 

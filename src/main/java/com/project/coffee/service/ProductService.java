@@ -17,10 +17,9 @@ public interface ProductService {
      * Retrieves a product by its ID from the repository.
      *
      * @param productId the ID of the product to retrieve
-     * @return a ProductDTO object representing the product with the given ID
-     * @throws com.project.coffee.exception.ResourceNotFoundException if no product is found with the given ID
+     * @return an Optional containing the ProductDTO object if found, empty otherwise
      */
-    ProductDTO getProductById(Integer productId);
+    java.util.Optional<ProductDTO> getProductById(Integer productId);
 
     /**
      * Creates a new product and stores it in the repository.
@@ -34,7 +33,7 @@ public interface ProductService {
     /**
      * Updates an existing product in the repository with the provided details.
      *
-     * @param productId  the ID of the product to update
+     * @param productId the ID of the product to update
      * @param productDTO the ProductDTO containing the updated product details
      * @return a ProductDTO representing the updated product
      * @throws com.project.coffee.exception.ResourceNotFoundException if no product is found with the given ID

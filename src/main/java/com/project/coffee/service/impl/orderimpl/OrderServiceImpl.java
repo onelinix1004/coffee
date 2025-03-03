@@ -1,6 +1,5 @@
 package com.project.coffee.service.impl.orderimpl;
 
-
 import com.project.coffee.dto.order.OrderDTO;
 import com.project.coffee.entity.order.Order;
 import com.project.coffee.exception.BadRequestException;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,14 +38,12 @@ public class OrderServiceImpl implements OrderService {
      * Retrieves an order by its ID from the repository.
      *
      * @param orderId the ID of the order to retrieve
-     * @return an OrderDTO object representing the order with the given ID
-     * @throws com.project.coffee.exception.ResourceNotFoundException if no order is found with the given ID
+     * @return an Optional containing the OrderDTO object if found, empty otherwise
      */
     @Override
-    public OrderDTO getOrderById(Integer orderId) {
-        Order order = orderRepository.findById(orderId)
-                .orElseThrow(() -> new ResourceNotFoundException("Order not found with ID: " + orderId));
-        return convertToDTO(order);
+    public Optional<OrderDTO> getOrderById(Integer orderId) {
+        return orderRepository.findById(orderId)
+                .map(this::convertToDTO);
     }
 
     /**
@@ -54,7 +52,6 @@ public class OrderServiceImpl implements OrderService {
      * @param orderDTO the OrderDTO to create an order from
      * @return an OrderDTO representing the newly created order
      * @throws BadRequestException if the order creation fails due to invalid input
-     * @throws ResourceNotFoundException if the order creation fails due to a missing resource
      */
     @Override
     public OrderDTO createOrder(OrderDTO orderDTO) {
@@ -78,7 +75,7 @@ public class OrderServiceImpl implements OrderService {
      * @param orderId the ID of the order to update
      * @param orderDTO the OrderDTO containing the updated order details
      * @return an OrderDTO representing the updated order
-     * @throws com.project.coffee.exception.ResourceNotFoundException if no order is found with the given ID
+     * @throws ResourceNotFoundException if no order is found with the given ID
      */
     @Override
     public OrderDTO updateOrder(Integer orderId, OrderDTO orderDTO) {
@@ -94,11 +91,12 @@ public class OrderServiceImpl implements OrderService {
         return convertToDTO(updatedOrder);
     }
 
+
     /**
      * Deletes an order from the repository by its ID.
      *
      * @param orderId the ID of the order to delete
-     * @throws com.project.coffee.exception.ResourceNotFoundException if no order is found with the given ID
+     * @throws ResourceNotFoundException if no order is found with the given ID
      */
     @Override
     public void deleteOrder(Integer orderId) {
@@ -108,10 +106,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
-     * Converts an Order entity into an OrderDTO.
+     * Converts an Order object to an OrderDTO object.
      *
-     * @param order The Order entity to convert
-     * @return The converted OrderDTO object
+     * @param order the Order object to convert
+     * @return the OrderDTO object representing the given Order
      */
     private OrderDTO convertToDTO(Order order) {
         OrderDTO dto = new OrderDTO();
@@ -127,10 +125,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
-     * Converts an OrderDTO into an Order entity.
+     * Converts an OrderDTO object to an Order object.
      *
-     * @param dto The OrderDTO object to convert
-     * @return The converted Order entity
+     * @param dto the OrderDTO object to convert
+     * @return the Order object representing the given OrderDTO
      */
     private Order convertToEntity(OrderDTO dto) {
         Order order = new Order();

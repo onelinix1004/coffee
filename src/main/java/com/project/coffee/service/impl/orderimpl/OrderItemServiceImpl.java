@@ -1,6 +1,5 @@
 package com.project.coffee.service.impl.orderimpl;
 
-
 import com.project.coffee.dto.order.OrderItemDTO;
 import com.project.coffee.entity.order.OrderItem;
 import com.project.coffee.exception.BadRequestException;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,14 +37,12 @@ public class OrderItemServiceImpl implements OrderItemService {
      * Retrieves an order item by its ID from the repository.
      *
      * @param orderItemId the ID of the order item to retrieve
-     * @return an OrderItemDTO object representing the order item with the given ID
-     * @throws ResourceNotFoundException if no order item is found with the given ID
+     * @return an Optional containing the OrderItemDTO object if found, empty otherwise
      */
     @Override
-    public OrderItemDTO getOrderItemById(Integer orderItemId) {
-        OrderItem orderItem = orderItemRepository.findById(orderItemId)
-                .orElseThrow(() -> new ResourceNotFoundException("Order Item not found with ID: " + orderItemId));
-        return convertToDTO(orderItem);
+    public Optional<OrderItemDTO> getOrderItemById(Integer orderItemId) {
+        return orderItemRepository.findById(orderItemId)
+                .map(this::convertToDTO);
     }
 
     /**
@@ -71,7 +69,7 @@ public class OrderItemServiceImpl implements OrderItemService {
     }
 
     /**
-     * Updates an existing order item in the repository with the given details.
+     * Updates an existing order item in the repository with the provided details.
      *
      * @param orderItemId the ID of the order item to update
      * @param orderItemDTO the OrderItemDTO containing the updated order item details
@@ -104,10 +102,10 @@ public class OrderItemServiceImpl implements OrderItemService {
     }
 
     /**
-     * Converts an OrderItem object to an OrderItemDTO object.
+     * Converts an OrderItem to an OrderItemDTO.
      *
-     * @param orderItem the OrderItem object to convert
-     * @return the OrderItemDTO object representing the given OrderItem
+     * @param orderItem the OrderItem to convert
+     * @return an OrderItemDTO representing the given OrderItem
      */
     private OrderItemDTO convertToDTO(OrderItem orderItem) {
         OrderItemDTO dto = new OrderItemDTO();
@@ -120,10 +118,10 @@ public class OrderItemServiceImpl implements OrderItemService {
     }
 
     /**
-     * Converts an OrderItemDTO object to an OrderItem object.
+     * Converts an OrderItemDTO to an OrderItem.
      *
-     * @param dto the OrderItemDTO object to convert
-     * @return the OrderItem object representing the given OrderItemDTO
+     * @param dto the OrderItemDTO to convert
+     * @return an OrderItem representing the given OrderItemDTO
      */
     private OrderItem convertToEntity(OrderItemDTO dto) {
         OrderItem orderItem = new OrderItem();

@@ -18,10 +18,9 @@ public interface OrderItemService {
      * Retrieves an order item by its ID from the repository.
      *
      * @param orderItemId the ID of the order item to retrieve
-     * @return an OrderItemDTO object representing the order item with the given ID
-     * @throws com.project.coffee.exception.ResourceNotFoundException if no order item is found with the given ID
+     * @return an Optional containing the OrderItemDTO object if found, empty otherwise
      */
-    OrderItemDTO getOrderItemById(Integer orderItemId);
+    java.util.Optional<OrderItemDTO> getOrderItemById(Integer orderItemId);
 
     /**
      * Creates a new order item and stores it in the repository.

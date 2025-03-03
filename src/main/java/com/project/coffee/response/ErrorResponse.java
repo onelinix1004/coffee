@@ -1,4 +1,4 @@
-package com.project.coffee.dto.response;
+package com.project.coffee.response;
 
 
 public class ErrorResponse {

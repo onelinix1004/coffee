@@ -1,6 +1,7 @@
 package com.project.coffee.exception;
 
 
+import com.project.coffee.dto.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

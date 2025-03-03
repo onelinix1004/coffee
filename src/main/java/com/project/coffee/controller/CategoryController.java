@@ -4,7 +4,7 @@ package com.project.coffee.controller;
 import com.project.coffee.dto.CategoryDTO;
 import com.project.coffee.exception.BadRequestException;
 import com.project.coffee.exception.ResourceNotFoundException;
-import com.project.coffee.service.CategoryService;
+import com.project.coffee.service.impl.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +16,7 @@ import java.util.List;
 public class CategoryController {
 
     @Autowired
-    private CategoryService categoryService;
+    private CategoryServiceImpl categoryServiceImpl;
 
     /**
      * Retrieves a list of all categories.
@@ -25,7 +25,7 @@ public class CategoryController {
      */
     @GetMapping
     public ResponseEntity<List<CategoryDTO>> getAllCategories() {
-        List<CategoryDTO> categories = categoryService.getAllCategories();
+        List<CategoryDTO> categories = categoryServiceImpl.getAllCategories();
         return ResponseEntity.ok(categories);
     }
 
@@ -39,7 +39,7 @@ public class CategoryController {
     @GetMapping("/{categoryId}")
     public ResponseEntity<CategoryDTO> getCategoryById(@PathVariable Integer categoryId) {
         try {
-            CategoryDTO category = categoryService.getCategoryById(categoryId);
+            CategoryDTO category = categoryServiceImpl.getCategoryById(categoryId);
             return ResponseEntity.ok(category);
         } catch (ResourceNotFoundException ex) {
             return ResponseEntity.status(404).body(null); // Hoặc trả về lỗi JSON
@@ -56,7 +56,7 @@ public class CategoryController {
     @PostMapping
     public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryDTO categoryDTO) {
         try {
-            CategoryDTO createdCategory = categoryService.createCategory(categoryDTO);
+            CategoryDTO createdCategory = categoryServiceImpl.createCategory(categoryDTO);
             return ResponseEntity.status(201).body(createdCategory);
         } catch (BadRequestException ex) {
             return ResponseEntity.badRequest().body(null); // Hoặc trả về lỗi JSON
@@ -75,7 +75,7 @@ public class CategoryController {
     @PutMapping("/{categoryId}")
     public ResponseEntity<CategoryDTO> updateCategory(@PathVariable Integer categoryId, @RequestBody CategoryDTO categoryDTO) {
         try {
-            CategoryDTO updatedCategory = categoryService.updateCategory(categoryId, categoryDTO);
+            CategoryDTO updatedCategory = categoryServiceImpl.updateCategory(categoryId, categoryDTO);
             return ResponseEntity.ok(updatedCategory);
         } catch (ResourceNotFoundException ex) {
             return ResponseEntity.status(404).body(null);
@@ -93,7 +93,7 @@ public class CategoryController {
     @DeleteMapping("/{categoryId}")
     public ResponseEntity<Void> deleteCategory(@PathVariable Integer categoryId) {
         try {
-            categoryService.deleteCategory(categoryId);
+            categoryServiceImpl.deleteCategory(categoryId);
             return ResponseEntity.ok().build();
         } catch (ResourceNotFoundException ex) {
             return ResponseEntity.status(404).build();

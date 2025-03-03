@@ -1,4 +1,4 @@
-package com.project.coffee.exception;
+package com.project.coffee.dto.response;
 
 
 public class ErrorResponse {
@@ -12,7 +12,6 @@ public class ErrorResponse {
         this.details = details;
     }
 
-    // Getters and Setters
     public int getStatus() {
         return status;
     }

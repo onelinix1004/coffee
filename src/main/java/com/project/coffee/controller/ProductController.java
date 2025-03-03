@@ -3,7 +3,7 @@ package com.project.coffee.controller;
 import com.project.coffee.dto.ProductDTO;
 import com.project.coffee.exception.BadRequestException;
 import com.project.coffee.exception.ResourceNotFoundException;
-import com.project.coffee.service.ProductService;
+import com.project.coffee.service.impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    private ProductService productService;
+    private ProductServiceImpl productServiceImpl;
 
     /**
      * Retrieves a list of all products from the database.
@@ -25,7 +25,7 @@ public class ProductController {
      */
     @GetMapping
     public ResponseEntity<List<ProductDTO>> getAllProducts() {
-        List<ProductDTO> products = productService.getAllProducts();
+        List<ProductDTO> products = productServiceImpl.getAllProducts();
         return ResponseEntity.ok(products);
     }
 
@@ -39,7 +39,7 @@ public class ProductController {
     @GetMapping("/{productId}")
     public ResponseEntity<ProductDTO> getProductById(@PathVariable Integer productId) {
         try {
-            ProductDTO product = productService.getProductById(productId);
+            ProductDTO product = productServiceImpl.getProductById(productId);
             return ResponseEntity.ok(product);
         } catch (ResourceNotFoundException ex) {
             return ResponseEntity.status(404).body(null);
@@ -56,7 +56,7 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) {
         try {
-            ProductDTO createdProduct = productService.createProduct(productDTO);
+            ProductDTO createdProduct = productServiceImpl.createProduct(productDTO);
             return ResponseEntity.status(201).body(createdProduct);
         } catch (BadRequestException ex) {
             return ResponseEntity.badRequest().body(null);
@@ -75,7 +75,7 @@ public class ProductController {
     @PutMapping("/{productId}")
     public ResponseEntity<ProductDTO> updateProduct(@PathVariable Integer productId, @RequestBody ProductDTO productDTO) {
         try {
-            ProductDTO updatedProduct = productService.updateProduct(productId, productDTO);
+            ProductDTO updatedProduct = productServiceImpl.updateProduct(productId, productDTO);
             return ResponseEntity.ok(updatedProduct);
         } catch (ResourceNotFoundException ex) {
             return ResponseEntity.status(404).body(null);
@@ -94,7 +94,7 @@ public class ProductController {
     @DeleteMapping("/{productId}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Integer productId) {
         try {
-            productService.deleteProduct(productId);
+            productServiceImpl.deleteProduct(productId);
             return ResponseEntity.ok().build();
         } catch (ResourceNotFoundException ex) {
             return ResponseEntity.status(404).build();

@@ -8,15 +8,14 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserDTO {
+public class ReviewDTO {
 
+    private Integer reviewId;
     private Integer userId;
-    private String username;
-    private String email;
-    private String password;
-    private String role;
+    private Integer storeId;
+    private Integer orderId;
+    private Integer rating;
+    private String comment;
     private Timestamp createdAt;
-    private Integer loyaltyPoints;
-
 
 }

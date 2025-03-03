@@ -1,5 +1,6 @@
 package com.project.coffee.dto;
 
+
 import lombok.*;
 
 import java.sql.Timestamp;
@@ -8,15 +9,13 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserDTO {
+public class StoreDTO {
 
+    private Integer storeId;
     private Integer userId;
-    private String username;
-    private String email;
-    private String password;
-    private String role;
+    private String storeName;
+    private String description;
+    private String customLayout;
     private Timestamp createdAt;
-    private Integer loyaltyPoints;
-
 
 }

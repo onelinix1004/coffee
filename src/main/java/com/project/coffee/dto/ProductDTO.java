@@ -20,4 +20,5 @@ public class ProductDTO {
     private Integer categoryId;
     private Timestamp createdAt;
     private Integer isActive;
+
 }

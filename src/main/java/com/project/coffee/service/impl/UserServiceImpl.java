@@ -1,6 +1,5 @@
 package com.project.coffee.service.impl;
 
-
 import com.project.coffee.dto.UserDTO;
 import com.project.coffee.entity.User;
 import com.project.coffee.exception.BadRequestException;
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,14 +36,12 @@ public class UserServiceImpl implements UserService {
      * Retrieves a user by their ID from the repository.
      *
      * @param userId the ID of the user to retrieve
-     * @return a UserDTO object representing the user with the given ID
-     * @throws ResourceNotFoundException if no user is found with the given ID
+     * @return an Optional containing the UserDTO object if found, empty otherwise
      */
     @Override
-    public UserDTO getUserById(Integer userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + userId));
-        return convertToDTO(user);
+    public Optional<UserDTO> getUserById(Integer userId) {
+        return userRepository.findById(userId)
+                .map(this::convertToDTO);
     }
 
     /**
@@ -75,10 +73,10 @@ public class UserServiceImpl implements UserService {
     /**
      * Updates an existing user in the repository with the provided details.
      *
-     * @param userId  the ID of the user to update
+     * @param userId the ID of the user to update
      * @param userDTO the UserDTO containing the updated user details
      * @return a UserDTO representing the updated user
-     * @throws ResourceNotFoundException if no user is found with the given ID
+     * @throws com.project.coffee.exception.ResourceNotFoundException if no user is found with the given ID
      */
     @Override
     public UserDTO updateUser(Integer userId, UserDTO userDTO) {
@@ -97,7 +95,7 @@ public class UserServiceImpl implements UserService {
      * Deletes a user from the repository by their ID.
      *
      * @param userId the ID of the user to delete
-     * @throws ResourceNotFoundException if no user is found with the given ID
+     * @throws com.project.coffee.exception.ResourceNotFoundException if no user is found with the given ID
      */
     @Override
     public void deleteUser(Integer userId) {
@@ -106,12 +104,6 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(user);
     }
 
-    /**
-     * Converts a User entity to a UserDTO.
-     *
-     * @param user the User entity to convert
-     * @return a UserDTO object representing the given User entity
-     */
     private UserDTO convertToDTO(User user) {
         UserDTO dto = new UserDTO();
         dto.setUserId(user.getUserId());
@@ -125,10 +117,10 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * Converts a UserDTO object to a User entity.
+     * Converts a UserDTO into a User entity.
      *
-     * @param dto the UserDTO to convert
-     * @return a User entity representing the given UserDTO
+     * @param dto The UserDTO object to convert
+     * @return The converted User entity
      */
     private User convertToEntity(UserDTO dto) {
         User user = new User();

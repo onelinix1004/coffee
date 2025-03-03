@@ -1,9 +1,9 @@
 package com.project.coffee.service;
 
-
 import com.project.coffee.dto.UserDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
 
@@ -18,10 +18,9 @@ public interface UserService {
      * Retrieves a user by their ID from the repository.
      *
      * @param userId the ID of the user to retrieve
-     * @return a UserDTO object representing the user with the given ID
-     * @throws com.project.coffee.exception.ResourceNotFoundException if no user is found with the given ID
+     * @return an Optional containing the UserDTO object if found, empty otherwise
      */
-    UserDTO getUserById(Integer userId);
+    Optional<UserDTO> getUserById(Integer userId);
 
     /**
      * Creates a new user and stores it in the repository.

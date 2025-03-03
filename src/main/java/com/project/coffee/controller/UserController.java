@@ -1,6 +1,5 @@
 package com.project.coffee.controller;
 
-
 import com.project.coffee.dto.UserDTO;
 import com.project.coffee.service.UserService;
 import com.project.coffee.exception.ResourceNotFoundException;
@@ -18,7 +17,7 @@ public class UserController {
     private UserService userService;
 
     /**
-     * Retrieves a list of all users.
+     * Retrieves a list of all users from the repository.
      *
      * @return a ResponseEntity containing a list of UserDTO objects representing all users
      */
@@ -29,26 +28,25 @@ public class UserController {
     }
 
     /**
-     * Retrieves a user by their ID.
+     * Retrieves a user by its ID from the repository.
      *
      * @param userId the ID of the user to retrieve
-     * @return a ResponseEntity containing the user with the given ID, or a 404 response if not found
+     * @return a ResponseEntity containing the UserDTO object if found,
+     *         or a 404 response if not found
      */
     @GetMapping("/{userId}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable Integer userId) {
-        try {
-            UserDTO user = userService.getUserById(userId);
-            return ResponseEntity.ok(user);
-        } catch (ResourceNotFoundException ex) {
-            return ResponseEntity.status(404).body(null);
-        }
+        return userService.getUserById(userId)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(404).body(null));
     }
 
     /**
-     * Creates a new user.
+     * Creates a new user and stores it in the repository.
      *
-     * @param userDTO the UserDTO containing the user details to be created
-     * @return a ResponseEntity containing the newly created UserDTO, or a 400 response if the user creation fails
+     * @param userDTO the UserDTO to create a user from
+     * @return a ResponseEntity containing the newly created UserDTO,
+     *         or a 400 response if the request body is invalid
      */
     @PostMapping
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
@@ -61,11 +59,12 @@ public class UserController {
     }
 
     /**
-     * Updates an existing user with the given ID.
+     * Updates an existing user in the repository with the provided details.
      *
-     * @param userId  the ID of the user to update
+     * @param userId the ID of the user to update
      * @param userDTO the UserDTO containing the updated user details
-     * @return a ResponseEntity containing the updated UserDTO, or a 404 response if the user does not exist
+     * @return a ResponseEntity containing the updated UserDTO if found,
+     *         or a 404 response if not found
      */
     @PutMapping("/{userId}")
     public ResponseEntity<UserDTO> updateUser(@PathVariable Integer userId, @RequestBody UserDTO userDTO) {
@@ -78,10 +77,11 @@ public class UserController {
     }
 
     /**
-     * Deletes a user with the given ID.
+     * Deletes a user from the repository by its ID.
      *
      * @param userId the ID of the user to delete
-     * @return a ResponseEntity with no content, or a 404 response if the user does not exist
+     * @return a ResponseEntity with no content if the deletion is successful,
+     *         or a 404 response if the user with the given ID is not found
      */
     @DeleteMapping("/{userId}")
     public ResponseEntity<Void> deleteUser(@PathVariable Integer userId) {

@@ -1,14 +1,17 @@
 package com.project.coffee.entity.order;
 
-
+import com.project.coffee.entity.Product;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "Order_Items")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class OrderItem {
 
     @Id
@@ -17,17 +20,17 @@ public class OrderItem {
     @Column(name = "order_item_id")
     private Integer orderItemId;
 
-    @Column(name = "order_id")
-    private Integer orderId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", referencedColumnName = "order_id")
+    private com.project.coffee.entity.Order order;
 
-    @Column(name = "product_id")
-    private Integer productId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
+    private Product product;
 
     @Column(name = "quantity")
     private Integer quantity;
 
     @Column(name = "price_at_time")
     private BigDecimal priceAtTime;
-
-
 }

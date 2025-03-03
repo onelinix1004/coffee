@@ -31,4 +31,12 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
      * @return a list of products with matching isActive flag.
      */
     List<Product> findByIsActive(Integer isActive);
+
+    /**
+     * Retrieves a list of products whose category matches the specified value.
+     *
+     * @param categoryId the categoryId to search for.
+     * @return a list of products with matching category.
+     */
+    List<Product> findByCategory_CategoryId(Integer categoryId);
 }

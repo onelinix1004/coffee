@@ -38,7 +38,7 @@ public class OrderItemController {
     public ResponseEntity<OrderItemDTO> getOrderItemById(@PathVariable Integer orderItemId) {
         return orderItemService.getOrderItemById(orderItemId)
                 .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.status(404).body(null)); // Hoặc trả về lỗi JSON
+                .orElseGet(() -> ResponseEntity.status(404).body(null));
     }
 
     /**
@@ -54,7 +54,7 @@ public class OrderItemController {
             OrderItemDTO createdOrderItem = orderItemService.createOrderItem(orderItemDTO);
             return ResponseEntity.status(201).body(createdOrderItem);
         } catch (Exception ex) {
-            return ResponseEntity.badRequest().body(null); // Hoặc trả về lỗi JSON
+            return ResponseEntity.badRequest().body(null);
         }
     }
 

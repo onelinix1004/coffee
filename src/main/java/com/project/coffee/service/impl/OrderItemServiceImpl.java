@@ -4,7 +4,6 @@ package com.project.coffee.service.impl;
 import com.project.coffee.entity.OrderItem;
 import com.project.coffee.exception.BadRequestException;
 import com.project.coffee.exception.ResourceNotFoundException;
-import com.project.coffee.repository.OrderItemRepository;
 import com.project.coffee.service.OrderItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

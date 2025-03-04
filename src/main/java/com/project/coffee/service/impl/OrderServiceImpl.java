@@ -3,7 +3,6 @@ package com.project.coffee.service.impl;
 import com.project.coffee.entity.Order;
 import com.project.coffee.exception.BadRequestException;
 import com.project.coffee.exception.ResourceNotFoundException;
-import com.project.coffee.repository.OrderRepository;
 import com.project.coffee.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

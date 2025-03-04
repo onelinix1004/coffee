@@ -11,15 +11,13 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class StoreDTO {
+public class PermissionDTO {
     private Long id;
     private String name;
-    private String location;
-    private String phoneNumber;
-    private String email;
-    private String website;
+    private String description;
+    private String resource;
+    private String action;
     private boolean isActive;
-    private Long warehouseAddressId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

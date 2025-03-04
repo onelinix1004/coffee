@@ -1,6 +1,5 @@
 package com.project.coffee.controller;
 
-import com.project.coffee.dto.OrderItemDTO;
 import com.project.coffee.exception.ResourceNotFoundException;
 import com.project.coffee.service.OrderItemService;
 import org.springframework.beans.factory.annotation.Autowired;

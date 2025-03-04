@@ -1,7 +1,5 @@
 package com.project.coffee.service;
 
-import com.project.coffee.dto.CategoryDTO;
-
 import java.util.List;
 import java.util.Optional;
 

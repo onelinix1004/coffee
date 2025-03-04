@@ -1,21 +1,24 @@
 package com.project.coffee.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class ReviewDTO {
-
-    private Integer reviewId;
-    private Integer userId;
-    private Integer storeId;
-    private Integer orderId;
-    private Integer rating;
+    private Long id;
+    private int rating;
     private String comment;
-    private Timestamp createdAt;
-
+    private Long productId;
+    private Long userId;
+    private Long storeId;
+    private LocalDateTime reviewDate;
+    private boolean isVerified;
+    private String title;
 }

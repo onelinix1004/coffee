@@ -4,18 +4,18 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "tbl_category")
-public class Category {
+@Table(name = "tbl_role")
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_id")
+    @Column(name = "role_id")
     private Long id;
 
     private String name;
@@ -24,10 +24,14 @@ public class Category {
     private LocalDateTime updatedAt;
     private boolean isActive;
 
-    @ManyToOne
-    @JoinColumn(name = "parent_category_id")
-    private Category parentCategory;
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private List<Product> products;
+    @ManyToMany
+    @JoinTable(
+            name = "role_permission",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "permission_id")
+    )
+    private Set<Permission> permissions;
 }

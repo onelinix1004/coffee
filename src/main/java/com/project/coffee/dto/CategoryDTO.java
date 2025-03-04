@@ -1,18 +1,22 @@
 package com.project.coffee.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class CategoryDTO {
-
-    private Integer categoryId;
+    private Long id;
     private String name;
-    private Integer parentId;
-    private Timestamp createdAt;
-
+    private String description;
+    private Long parentCategoryId;
+    private boolean isActive;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

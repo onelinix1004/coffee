@@ -4,30 +4,28 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "tbl_category")
-public class Category {
+@Table(name = "tbl_permission")
+public class Permission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_id")
+    @Column(name = "permission_id")
     private Long id;
 
     private String name;
     private String description;
+    private String resource;
+    private String action;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private boolean isActive;
 
-    @ManyToOne
-    @JoinColumn(name = "parent_category_id")
-    private Category parentCategory;
-
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private List<Product> products;
+    @ManyToMany(mappedBy = "permissions")
+    private Set<Role> roles;
 }

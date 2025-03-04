@@ -11,15 +11,15 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class StoreDTO {
+public class AddressDTO {
     private Long id;
-    private String name;
-    private String location;
-    private String phoneNumber;
-    private String email;
-    private String website;
-    private boolean isActive;
-    private Long warehouseAddressId;
+    private String street;
+    private String city;
+    private String postalCode;
+    private Long userId;
+    private Long storeId;
+    private String addressType;
+    private boolean isDefault;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

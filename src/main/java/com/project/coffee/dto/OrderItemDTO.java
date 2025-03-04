@@ -1,19 +1,20 @@
 package com.project.coffee.dto;
 
-import lombok.*;
-
-import java.math.BigDecimal;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class OrderItemDTO {
-
-    private Integer orderItemId;
-    private Integer orderId;
-    private Integer productId;
-    private Integer quantity;
-    private BigDecimal priceAtTime;
-
+    private Long id;
+    private int quantity;
+    private Long orderId;
+    private Long productId;
+    private double unitPrice;
+    private double subtotal;
+    private double discount;
 }

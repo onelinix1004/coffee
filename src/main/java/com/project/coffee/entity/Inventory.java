@@ -10,28 +10,32 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "tbl_review")
-public class Review {
+@Table(name = "tbl_inventory")
+public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "review_id")
+    @Column(name = "inventory_id")
     private Long id;
-
-    private int rating;
-    private String comment;
-    private LocalDateTime reviewDate;
-    private boolean isVerified;
-    private String title;
 
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    @ManyToOne
     @JoinColumn(name = "store_id", nullable = false)
     private Store store;
+
+    @Column(name = "quantity_in_stock")
+    private int quantityInStock;
+
+    @Column(name = "last_updated")
+    private LocalDateTime lastUpdated;
+
+    @Column(name = "min_threshold")
+    private int minThreshold;
+
+    @Column(name = "max_threshold")
+    private int maxThreshold;
+
+    private String status;
 }

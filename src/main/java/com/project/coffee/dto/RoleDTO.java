@@ -6,20 +6,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class StoreDTO {
+public class RoleDTO {
     private Long id;
     private String name;
-    private String location;
-    private String phoneNumber;
-    private String email;
-    private String website;
+    private String description;
     private boolean isActive;
-    private Long warehouseAddressId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private Set<Long> permissionIds;
 }

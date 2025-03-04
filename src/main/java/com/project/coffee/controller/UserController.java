@@ -1,6 +1,5 @@
 package com.project.coffee.controller;
 
-import com.project.coffee.dto.UserDTO;
 import com.project.coffee.service.UserService;
 import com.project.coffee.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

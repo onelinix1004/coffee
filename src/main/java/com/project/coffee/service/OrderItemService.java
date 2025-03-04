@@ -1,8 +1,6 @@
 package com.project.coffee.service;
 
 
-import com.project.coffee.dto.OrderItemDTO;
-
 import java.util.List;
 
 public interface OrderItemService {

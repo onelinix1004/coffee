@@ -1,48 +1,39 @@
 package com.project.coffee.entity;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity
-@Table(name = "Stores")
 @Data
+@Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Table(name = "tbl_store")
 public class Store {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "stores_seq")
-    @SequenceGenerator(name = "stores_seq", sequenceName = "stores_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "store_id")
-    private Integer storeId;
+    private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    private User user;
+    private String name;
+    private String location;
+    private String phoneNumber;
+    private String email;
+    private String website;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private boolean isActive;
 
-    @Column(name = "store_name")
-    private String storeName;
-
-    @Column(name = "description")
-    private String description;
-
-
-    @Column(name = "created_at")
-    private Timestamp createdAt;
-
-    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     private List<Product> products;
 
-    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Order> orders;
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+    private List<Inventory> inventories;
 
-
-    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Discount> discounts;
-
+    @ManyToOne
+    @JoinColumn(name = "warehouse_address_id")
+    private Address warehouseAddress;
 }

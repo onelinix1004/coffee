@@ -11,11 +11,13 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO {
+public class InventoryDTO {
     private Long id;
-    private String username;
-    private String email;
-    private String phoneNumber;
-    private boolean isActive;
-    private LocalDateTime lastLogin;
+    private Long productId;
+    private Long storeId;
+    private int quantityInStock;
+    private LocalDateTime lastUpdated;
+    private int minThreshold;
+    private int maxThreshold;
+    private String status;
 }

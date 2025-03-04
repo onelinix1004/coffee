@@ -1,22 +1,26 @@
 package com.project.coffee.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class OrderDTO {
-
-    private Integer orderId;
-    private Integer userId;
-    private Integer storeId;
-    private BigDecimal totalAmount;
+    private Long id;
     private String status;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
-    private String trackingCode;
+    private Long userId; // Thay vì đối tượng User
+    private Long storeId; // Thay vì đối tượng Store
+    private LocalDateTime orderDate;
+    private Long shippingAddressId; // Thay vì đối tượng Address
+    private double totalAmount;
+    private String paymentStatus;
+    private String trackingNumber;
+    private List<OrderItemDTO> orderItems; // Danh sách các mục đơn hàng
 }

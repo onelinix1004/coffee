@@ -1,6 +1,5 @@
 package com.project.coffee.controller;
 
-import com.project.coffee.dto.CategoryDTO;
 import com.project.coffee.service.CategoryService;
 import com.project.coffee.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

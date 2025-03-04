@@ -3,56 +3,48 @@ package com.project.coffee.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
-@Entity
-@Table(name = "Products")
 @Data
+@Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Table(name = "tbl_product")
 public class Product {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "products_seq")
-    @SequenceGenerator(name = "products_seq", sequenceName = "products_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
-    private Integer productId;
+    private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "store_id", referencedColumnName = "store_id")
+    private String name;
+    private double price;
+    private String description;
+    private int stockQuantity;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private boolean isAvailable;
+    private String imageUrl;
+
+    @ManyToOne
+    @JoinColumn(name = "store_id", nullable = false)
     private Store store;
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "description")
-    private String description;
-
-    @Column(name = "price")
-    private BigDecimal price;
-
-    @Column(name = "stock_quantity")
-    private Integer stockQuantity;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    @Column(name = "created_at")
-    private Timestamp createdAt;
+    @ManyToMany(mappedBy = "products")
+    private Set<Cart> carts;
 
-    @Column(name = "is_active")
-    private Integer isActive;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<Review> reviews;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<Inventory> inventories;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems;
-
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Wishlist> wishlists;
-
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Cart> carts;
 }

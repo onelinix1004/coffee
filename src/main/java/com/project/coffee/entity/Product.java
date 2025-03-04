@@ -1,6 +1,5 @@
 package com.project.coffee.entity;
 
-import com.project.coffee.entity.order.OrderItem;
 import jakarta.persistence.*;
 import lombok.*;
 

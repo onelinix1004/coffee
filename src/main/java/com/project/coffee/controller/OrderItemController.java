@@ -1,8 +1,8 @@
 package com.project.coffee.controller;
 
-import com.project.coffee.dto.order.OrderItemDTO;
+import com.project.coffee.dto.OrderItemDTO;
 import com.project.coffee.exception.ResourceNotFoundException;
-import com.project.coffee.service.order.OrderItemService;
+import com.project.coffee.service.OrderItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

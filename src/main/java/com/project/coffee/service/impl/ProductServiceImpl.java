@@ -38,6 +38,12 @@ public class ProductServiceImpl implements ProductService {
         if (productDTO.getName() == null || productDTO.getName().trim().isEmpty()) {
             throw new BadRequestException("Product name is required");
         }
+        if (productDTO.getStore() == null) {
+            throw new BadRequestException("Store  is required for a product");
+        }
+        if (productDTO.getCategory() == null) {
+            throw new BadRequestException("Category  is required for a product");
+        }
         Product product = convertToEntity(productDTO);
         Product savedProduct = productRepository.save(product);
         return convertToDTO(savedProduct);
@@ -51,8 +57,9 @@ public class ProductServiceImpl implements ProductService {
         product.setDescription(productDTO.getDescription());
         product.setPrice(productDTO.getPrice());
         product.setStockQuantity(productDTO.getStockQuantity());
-        product.setCategoryId(productDTO.getCategoryId());
+        product.setCategory(productDTO.getCategory());
         product.setIsActive(productDTO.getIsActive());
+        product.setStore(productDTO.getStore());
         Product updatedProduct = productRepository.save(product);
         return convertToDTO(updatedProduct);
     }
@@ -67,12 +74,12 @@ public class ProductServiceImpl implements ProductService {
     private ProductDTO convertToDTO(Product product) {
         ProductDTO dto = new ProductDTO();
         dto.setProductId(product.getProductId());
-        dto.setStoreId(product.getStoreId());
+        dto.setStore(product.getStore());
         dto.setName(product.getName());
         dto.setDescription(product.getDescription());
         dto.setPrice(product.getPrice());
         dto.setStockQuantity(product.getStockQuantity());
-        dto.setCategoryId(product.getCategoryId());
+        dto.setCategory(product.getCategory());
         dto.setCreatedAt(product.getCreatedAt());
         dto.setIsActive(product.getIsActive());
         return dto;
@@ -80,12 +87,12 @@ public class ProductServiceImpl implements ProductService {
 
     private Product convertToEntity(ProductDTO dto) {
         Product product = new Product();
-        product.setStoreId(dto.getStoreId());
+        product.setStore(dto.getStore());
         product.setName(dto.getName());
         product.setDescription(dto.getDescription());
         product.setPrice(dto.getPrice());
         product.setStockQuantity(dto.getStockQuantity());
-        product.setCategoryId(dto.getCategoryId());
+        product.setCategory(dto.getCategory());
         product.setIsActive(dto.getIsActive());
         return product;
     }

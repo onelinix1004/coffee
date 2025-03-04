@@ -74,7 +74,7 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found with ID: " + categoryId));
         category.setName(categoryDTO.getName());
-        category.setParentId(categoryDTO.getParentId());
+        category.setParent(convertToEntity(categoryDTO));
         Category updatedCategory = categoryRepository.save(category);
         return convertToDTO(updatedCategory);
     }
@@ -102,7 +102,7 @@ public class CategoryServiceImpl implements CategoryService {
         CategoryDTO dto = new CategoryDTO();
         dto.setCategoryId(category.getCategoryId());
         dto.setName(category.getName());
-        dto.setParentId(category.getParentId());
+        dto.setParentId(category.getParent().getCategoryId());
         dto.setCreatedAt(category.getCreatedAt());
         return dto;
     }
@@ -116,7 +116,7 @@ public class CategoryServiceImpl implements CategoryService {
     private Category convertToEntity(CategoryDTO dto) {
         Category category = new Category();
         category.setName(dto.getName());
-        category.setParentId(dto.getParentId());
+        category.setParent(categoryRepository.findById(dto.getParentId()).orElse(null));
         return category;
     }
 }

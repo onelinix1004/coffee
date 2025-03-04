@@ -1,7 +1,6 @@
 package com.project.coffee.entity;
 
 
-import com.project.coffee.entity.order.Order;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -32,8 +31,6 @@ public class Store {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "custom_layout")
-    private String customLayout;
 
     @Column(name = "created_at")
     private Timestamp createdAt;

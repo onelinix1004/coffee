@@ -1,7 +1,7 @@
 package com.project.coffee.repository;
 
 
-import com.project.coffee.entity.order.Order;
+import com.project.coffee.entity.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

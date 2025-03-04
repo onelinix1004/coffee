@@ -1,17 +1,17 @@
-package com.project.coffee.service.impl.orderimpl;
+package com.project.coffee.service.impl;
 
-import com.project.coffee.dto.order.OrderItemDTO;
-import com.project.coffee.entity.order.OrderItem;
+
+import com.project.coffee.dto.OrderItemDTO;
+import com.project.coffee.entity.OrderItem;
 import com.project.coffee.exception.BadRequestException;
 import com.project.coffee.exception.ResourceNotFoundException;
 import com.project.coffee.repository.OrderItemRepository;
-import com.project.coffee.service.order.OrderItemService;
+import com.project.coffee.service.OrderItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,11 +20,6 @@ public class OrderItemServiceImpl implements OrderItemService {
     @Autowired
     private OrderItemRepository orderItemRepository;
 
-    /**
-     * Retrieves a list of all order items from the repository.
-     *
-     * @return a list of OrderItemDTO objects representing all order items
-     */
     @Override
     public List<OrderItemDTO> getAllOrderItems() {
         List<OrderItem> orderItems = orderItemRepository.findAll();
@@ -33,25 +28,13 @@ public class OrderItemServiceImpl implements OrderItemService {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Retrieves an order item by its ID from the repository.
-     *
-     * @param orderItemId the ID of the order item to retrieve
-     * @return an Optional containing the OrderItemDTO object if found, empty otherwise
-     */
     @Override
-    public Optional<OrderItemDTO> getOrderItemById(Integer orderItemId) {
-        return orderItemRepository.findById(orderItemId)
-                .map(this::convertToDTO);
+    public OrderItemDTO getOrderItemById(Integer orderItemId) {
+        OrderItem orderItem = orderItemRepository.findById(orderItemId)
+                .orElseThrow(() -> new ResourceNotFoundException("Order Item not found with ID: " + orderItemId));
+        return convertToDTO(orderItem);
     }
 
-    /**
-     * Creates a new order item and stores it in the repository.
-     *
-     * @param orderItemDTO the OrderItemDTO to create an order item from
-     * @return an OrderItemDTO representing the newly created order item
-     * @throws BadRequestException if the order item creation fails due to invalid input
-     */
     @Override
     public OrderItemDTO createOrderItem(OrderItemDTO orderItemDTO) {
         if (orderItemDTO.getOrderId() == null || orderItemDTO.getProductId() == null) {
@@ -68,14 +51,6 @@ public class OrderItemServiceImpl implements OrderItemService {
         return convertToDTO(savedOrderItem);
     }
 
-    /**
-     * Updates an existing order item in the repository with the provided details.
-     *
-     * @param orderItemId the ID of the order item to update
-     * @param orderItemDTO the OrderItemDTO containing the updated order item details
-     * @return an OrderItemDTO representing the updated order item
-     * @throws ResourceNotFoundException if no order item is found with the given ID
-     */
     @Override
     public OrderItemDTO updateOrderItem(Integer orderItemId, OrderItemDTO orderItemDTO) {
         OrderItem orderItem = orderItemRepository.findById(orderItemId)
@@ -88,12 +63,6 @@ public class OrderItemServiceImpl implements OrderItemService {
         return convertToDTO(updatedOrderItem);
     }
 
-    /**
-     * Deletes an order item from the repository by its ID.
-     *
-     * @param orderItemId the ID of the order item to delete
-     * @throws ResourceNotFoundException if no order item is found with the given ID
-     */
     @Override
     public void deleteOrderItem(Integer orderItemId) {
         OrderItem orderItem = orderItemRepository.findById(orderItemId)
@@ -101,12 +70,6 @@ public class OrderItemServiceImpl implements OrderItemService {
         orderItemRepository.delete(orderItem);
     }
 
-    /**
-     * Converts an OrderItem to an OrderItemDTO.
-     *
-     * @param orderItem the OrderItem to convert
-     * @return an OrderItemDTO representing the given OrderItem
-     */
     private OrderItemDTO convertToDTO(OrderItem orderItem) {
         OrderItemDTO dto = new OrderItemDTO();
         dto.setOrderItemId(orderItem.getOrderItemId());
@@ -117,12 +80,6 @@ public class OrderItemServiceImpl implements OrderItemService {
         return dto;
     }
 
-    /**
-     * Converts an OrderItemDTO to an OrderItem.
-     *
-     * @param dto the OrderItemDTO to convert
-     * @return an OrderItem representing the given OrderItemDTO
-     */
     private OrderItem convertToEntity(OrderItemDTO dto) {
         OrderItem orderItem = new OrderItem();
         orderItem.setOrderId(dto.getOrderId());

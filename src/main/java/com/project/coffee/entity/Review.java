@@ -28,8 +28,8 @@ public class Review {
     private Store store;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", referencedColumnName = "order_id")
-    private com.project.coffee.entity.Order order;
+    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
+    private Product order;
 
     @Column(name = "rating")
     private Integer rating;

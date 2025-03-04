@@ -15,7 +15,6 @@ public class StoreDTO {
     private Integer userId;
     private String storeName;
     private String description;
-    private String customLayout;
     private Timestamp createdAt;
 
 }

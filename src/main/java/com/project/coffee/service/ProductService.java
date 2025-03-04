@@ -3,7 +3,6 @@ package com.project.coffee.service;
 import com.project.coffee.dto.ProductDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ProductService {
 
@@ -20,7 +19,7 @@ public interface ProductService {
      * @param productId the ID of the product to retrieve
      * @return an Optional containing the ProductDTO object if found, empty otherwise
      */
-    Optional<ProductDTO> getProductById(Integer productId);
+    java.util.Optional<ProductDTO> getProductById(Integer productId);
 
     /**
      * Creates a new product and stores it in the repository.

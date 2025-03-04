@@ -1,11 +1,11 @@
-package com.project.coffee.service.impl.orderimpl;
+package com.project.coffee.service.impl;
 
-import com.project.coffee.dto.order.OrderDTO;
-import com.project.coffee.entity.order.Order;
+import com.project.coffee.dto.OrderDTO;
+import com.project.coffee.entity.Order;
 import com.project.coffee.exception.BadRequestException;
 import com.project.coffee.exception.ResourceNotFoundException;
 import com.project.coffee.repository.OrderRepository;
-import com.project.coffee.service.order.OrderService;
+import com.project.coffee.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -81,8 +81,6 @@ public class OrderServiceImpl implements OrderService {
     public OrderDTO updateOrder(Integer orderId, OrderDTO orderDTO) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found with ID: " + orderId));
-        order.setUserId(orderDTO.getUserId());
-        order.setStoreId(orderDTO.getStoreId());
         order.setTotalAmount(orderDTO.getTotalAmount());
         order.setStatus(orderDTO.getStatus());
         order.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
@@ -114,8 +112,6 @@ public class OrderServiceImpl implements OrderService {
     private OrderDTO convertToDTO(Order order) {
         OrderDTO dto = new OrderDTO();
         dto.setOrderId(order.getOrderId());
-        dto.setUserId(order.getUserId());
-        dto.setStoreId(order.getStoreId());
         dto.setTotalAmount(order.getTotalAmount());
         dto.setStatus(order.getStatus());
         dto.setCreatedAt(order.getCreatedAt());
@@ -132,8 +128,6 @@ public class OrderServiceImpl implements OrderService {
      */
     private Order convertToEntity(OrderDTO dto) {
         Order order = new Order();
-        order.setUserId(dto.getUserId());
-        order.setStoreId(dto.getStoreId());
         order.setTotalAmount(dto.getTotalAmount());
         order.setStatus(dto.getStatus());
         order.setTrackingCode(dto.getTrackingCode());

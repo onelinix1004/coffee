@@ -1,6 +1,5 @@
 package com.project.coffee.entity;
 
-import com.project.coffee.entity.order.Order;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -40,7 +39,7 @@ public class User {
     private Integer loyaltyPoints;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Order> orders;
+    private List<com.project.coffee.entity.Order> orders;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Store> stores;

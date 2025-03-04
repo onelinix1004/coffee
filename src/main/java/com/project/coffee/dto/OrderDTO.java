@@ -1,4 +1,4 @@
-package com.project.coffee.dto.order;
+package com.project.coffee.dto;
 
 import lombok.*;
 

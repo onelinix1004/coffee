@@ -1,6 +1,5 @@
 package com.project.coffee.entity;
 
-import com.project.coffee.entity.order.OrderItem;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -48,6 +47,4 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OrderItem> orderItems;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Review> reviews;
 }

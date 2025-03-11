@@ -1,5 +1,6 @@
 package com.project.coffee.dto;
 
+import com.project.coffee.entity.Address;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,4 +23,17 @@ public class AddressDTO {
     private boolean isDefault;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    public static Address convertToEntity(AddressDTO dto) {
+        return Address.builder()
+                .id(dto.getId())
+                .street(dto.getStreet())
+                .city(dto.getCity())
+                .postalCode(dto.getPostalCode())
+                .addressType(dto.getAddressType())
+                .isDefault(dto.isDefault())
+                .createdAt(dto.getCreatedAt() != null ? dto.getCreatedAt() : LocalDateTime.now())
+                .updatedAt(dto.getUpdatedAt() != null ? dto.getUpdatedAt() : LocalDateTime.now())
+                .build();
+    }
 }

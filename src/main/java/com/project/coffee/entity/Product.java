@@ -2,6 +2,7 @@ package com.project.coffee.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,39 +13,40 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "tbl_product")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
-    private Long id;
+    Long id;
 
-    private String name;
-    private double price;
-    private String description;
-    private int stockQuantity;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private boolean isAvailable;
-    private String imageUrl;
+    String name;
+    double price;
+    String description;
+    int stockQuantity;
+    LocalDateTime createdAt;
+    LocalDateTime updatedAt;
+    boolean isAvailable;
+    String imageUrl;
 
     @ManyToOne
     @JoinColumn(name = "store_id", nullable = false)
-    private Store store;
+    Store store;
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
+    Category category;
 
     @ManyToMany(mappedBy = "products")
-    private Set<Cart> carts;
+    Set<Cart> carts;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<Review> reviews;
+    List<Review> reviews;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<Inventory> inventories;
+    List<Inventory> inventories;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<OrderItem> orderItems;
+    List<OrderItem> orderItems;
 }

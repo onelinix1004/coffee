@@ -1,5 +1,6 @@
 package com.project.coffee.dto;
 
+import com.project.coffee.entity.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,4 +24,16 @@ public class ProductDTO {
     private String imageUrl;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    public static Product convertToEntity(ProductDTO dto) {
+        return Product.builder()
+                .id(dto.getId())
+                .name(dto.getName())
+                .price(dto.getPrice())
+                .description(dto.getDescription())
+                .stockQuantity(dto.getStockQuantity())
+                .isAvailable(dto.isAvailable())
+                .imageUrl(dto.getImageUrl())
+                .build();
+    }
 }

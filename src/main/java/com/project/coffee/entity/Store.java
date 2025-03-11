@@ -2,6 +2,7 @@ package com.project.coffee.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,29 +12,26 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "tbl_store")
 public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "store_id")
-    private Long id;
+    Long id;
 
-    private String name;
-    private String location;
-    private String phoneNumber;
-    private String email;
-    private String website;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private boolean isActive;
-
-    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
-    private List<Product> products;
+    String name;
+    String location;
+    String phoneNumber;
+    String email;
+    LocalDateTime createdAt;
+    LocalDateTime updatedAt;
+    boolean isActive;
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
-    private List<Inventory> inventories;
+    List<Product> products;
 
-    @ManyToOne
-    @JoinColumn(name = "warehouse_address_id")
-    private Address warehouseAddress;
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+    List<Inventory> inventories;
+
 }

@@ -1,5 +1,6 @@
 package com.project.coffee.dto;
 
+import com.project.coffee.entity.Store;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,9 +18,21 @@ public class StoreDTO {
     private String location;
     private String phoneNumber;
     private String email;
-    private String website;
     private boolean isActive;
-    private Long warehouseAddressId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+
+    public static Store convertToEntity(StoreDTO storeDTO) {
+        return Store.builder()
+                .id(storeDTO.getId())
+                .name(storeDTO.getName())
+                .location(storeDTO.getLocation())
+                .phoneNumber(storeDTO.getPhoneNumber())
+                .email(storeDTO.getEmail())
+                .isActive(storeDTO.isActive())
+                .createdAt(storeDTO.getCreatedAt())
+                .updatedAt(storeDTO.getUpdatedAt())
+                .build();
+    }
 }

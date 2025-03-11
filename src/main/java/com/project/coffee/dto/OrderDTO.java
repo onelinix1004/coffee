@@ -1,5 +1,6 @@
 package com.project.coffee.dto;
 
+import com.project.coffee.entity.Order;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,5 +23,16 @@ public class OrderDTO {
     private double totalAmount;
     private String paymentStatus;
     private String trackingNumber;
-    private List<OrderItemDTO> orderItems; // Danh sách các mục đơn hàng
+    private List<OrderItemDTO> orderItems;
+
+    public static Order convertToEntity(OrderDTO dto) {
+        return Order.builder()
+                .id(dto.getId())
+                .status(dto.getStatus())
+                .orderDate(dto.getOrderDate() != null ? dto.getOrderDate() : LocalDateTime.now())
+                .totalAmount(dto.getTotalAmount())
+                .paymentStatus(dto.getPaymentStatus())
+                .trackingNumber(dto.getTrackingNumber())
+                .build();
+    }
 }

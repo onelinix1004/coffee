@@ -2,6 +2,7 @@ package com.project.coffee.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 
@@ -10,28 +11,29 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "tbl_review")
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_id")
-    private Long id;
+    Long id;
 
-    private int rating;
-    private String comment;
-    private LocalDateTime reviewDate;
-    private boolean isVerified;
-    private String title;
+    int rating;
+    String comment;
+    LocalDateTime reviewDate;
+    boolean isVerified;
+    String title;
 
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
+    Product product;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    User user;
 
     @ManyToOne
     @JoinColumn(name = "store_id", nullable = false)
-    private Store store;
+    Store store;
 }

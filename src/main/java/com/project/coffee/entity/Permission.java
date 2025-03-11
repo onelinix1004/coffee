@@ -2,6 +2,7 @@ package com.project.coffee.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -11,21 +12,22 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "tbl_permission")
 public class Permission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "permission_id")
-    private Long id;
+    Long id;
 
-    private String name;
-    private String description;
-    private String resource;
-    private String action;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private boolean isActive;
+    String name;
+    String description;
+    String resource;
+    String action;
+    LocalDateTime createdAt;
+    LocalDateTime updatedAt;
+    boolean isActive;
 
     @ManyToMany(mappedBy = "permissions")
-    private Set<Role> roles;
+    Set<Role> roles;
 }

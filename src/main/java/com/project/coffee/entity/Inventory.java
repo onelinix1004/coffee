@@ -2,6 +2,7 @@ package com.project.coffee.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 
@@ -10,32 +11,33 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "tbl_inventory")
 public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "inventory_id")
-    private Long id;
+    Long id;
 
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
+    Product product;
 
     @ManyToOne
     @JoinColumn(name = "store_id", nullable = false)
-    private Store store;
+    Store store;
 
     @Column(name = "quantity_in_stock")
-    private int quantityInStock;
+    int quantityInStock;
 
     @Column(name = "last_updated")
-    private LocalDateTime lastUpdated;
+    LocalDateTime lastUpdated;
 
     @Column(name = "min_threshold")
-    private int minThreshold;
+    int minThreshold;
 
     @Column(name = "max_threshold")
-    private int maxThreshold;
+    int maxThreshold;
 
-    private String status;
+    String status;
 }

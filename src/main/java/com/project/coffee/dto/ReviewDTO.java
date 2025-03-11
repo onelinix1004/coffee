@@ -1,5 +1,6 @@
 package com.project.coffee.dto;
 
+import com.project.coffee.entity.Review;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,4 +22,15 @@ public class ReviewDTO {
     private LocalDateTime reviewDate;
     private boolean isVerified;
     private String title;
+
+    public static Review convertToEntity(ReviewDTO dto) {
+        return Review.builder()
+                .id(dto.getId())
+                .rating(dto.getRating())
+                .comment(dto.getComment())
+                .reviewDate(dto.getReviewDate() != null ? dto.getReviewDate() : LocalDateTime.now())
+                .isVerified(dto.isVerified())
+                .title(dto.getTitle())
+                .build();
+    }
 }

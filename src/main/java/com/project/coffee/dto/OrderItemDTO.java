@@ -1,5 +1,6 @@
 package com.project.coffee.dto;
 
+import com.project.coffee.entity.OrderItem;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,4 +18,14 @@ public class OrderItemDTO {
     private double unitPrice;
     private double subtotal;
     private double discount;
+
+    public static OrderItem convertToEntity(OrderItemDTO dto) {
+        return OrderItem.builder()
+                .id(dto.getId())
+                .quantity(dto.getQuantity())
+                .unitPrice(dto.getUnitPrice())
+                .subtotal(dto.getSubtotal())
+                .discount(dto.getDiscount())
+                .build();
+    }
 }

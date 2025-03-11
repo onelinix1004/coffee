@@ -2,6 +2,7 @@ package com.project.coffee.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -11,21 +12,22 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "tbl_role")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
-    private Long id;
+    Long id;
 
-    private String name;
-    private String description;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private boolean isActive;
+    String name;
+    String description;
+    LocalDateTime createdAt;
+    LocalDateTime updatedAt;
+    boolean isActive;
 
     @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+    Set<User> users;
 
     @ManyToMany
     @JoinTable(
@@ -33,5 +35,5 @@ public class Role {
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "permission_id")
     )
-    private Set<Permission> permissions;
+    Set<Permission> permissions;
 }

@@ -1,5 +1,6 @@
 package com.project.coffee.dto;
 
+import com.project.coffee.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,4 +19,14 @@ public class UserDTO {
     private String phoneNumber;
     private boolean isActive;
     private LocalDateTime lastLogin;
+
+    public static User convertToEntity(UserDTO dto) {
+        return User.builder()
+                .id(dto.getId())
+                .username(dto.getUsername())
+                .email(dto.getEmail())
+                .phoneNumber(dto.getPhoneNumber())
+                .isActive(dto.isActive())
+                .build();
+    }
 }

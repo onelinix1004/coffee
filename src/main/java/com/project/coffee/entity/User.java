@@ -2,6 +2,7 @@ package com.project.coffee.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,33 +13,34 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "tbl_user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long id;
+    Long id;
 
-    private String username;
-    private String email;
-    private String password;
-    private String phoneNumber;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private boolean isActive;
-    private LocalDateTime lastLogin;
+    String username;
+    String email;
+    String password;
+    String phoneNumber;
+    LocalDateTime createdAt;
+    LocalDateTime updatedAt;
+    boolean isActive;
+    LocalDateTime lastLogin;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Cart cart;
+    Cart cart;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Order> orders;
+    List<Order> orders;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Address> addresses;
+    List<Address> addresses;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Review> reviews;
+    List<Review> reviews;
 
     @ManyToMany
     @JoinTable(
@@ -46,5 +48,5 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<Role> roles;
+    Set<Role> roles;
 }

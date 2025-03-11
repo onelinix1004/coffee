@@ -16,20 +16,20 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cart_id")
-    private Long id;
+    Long id;
 
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    User user;
 
     @ManyToOne
     @JoinColumn(name = "store_id", nullable = false)
-    private Store store;
+    Store store;
 
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private int totalItems;
-    private double totalAmount;
+    LocalDateTime createdAt;
+    LocalDateTime updatedAt;
+    int totalItems;
+    double totalAmount;
 
     @ManyToMany
     @JoinTable(
@@ -37,5 +37,5 @@ public class Cart {
             joinColumns = @JoinColumn(name = "cart_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
-    private Set<Product> products;
+    Set<Product> products;
 }

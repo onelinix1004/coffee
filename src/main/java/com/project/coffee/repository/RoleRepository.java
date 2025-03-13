@@ -1,6 +1,6 @@
 package com.project.coffee.repository;
 
-import com.project.coffee.entity.Role;
+import com.project.coffee.entity.user.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

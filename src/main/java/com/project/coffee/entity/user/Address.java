@@ -1,5 +1,6 @@
-package com.project.coffee.entity;
+package com.project.coffee.entity.user;
 
+import com.project.coffee.entity.store.Store;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;

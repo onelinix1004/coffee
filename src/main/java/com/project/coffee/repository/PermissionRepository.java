@@ -1,6 +1,6 @@
 package com.project.coffee.repository;
 
-import com.project.coffee.entity.Permission;
+import com.project.coffee.entity.user.Permission;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

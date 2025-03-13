@@ -1,6 +1,6 @@
 package com.project.coffee.repository;
 
-import com.project.coffee.entity.Cart;
+import com.project.coffee.entity.store.Cart;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

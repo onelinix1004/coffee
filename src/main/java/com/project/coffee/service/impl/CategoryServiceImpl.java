@@ -1,7 +1,7 @@
 package com.project.coffee.service.impl;
 
 import com.project.coffee.dto.CategoryDTO;
-import com.project.coffee.entity.Category;
+import com.project.coffee.entity.store.Category;
 import com.project.coffee.exception.DuplicateResourceException;
 import com.project.coffee.exception.ResourceNotFoundException;
 import com.project.coffee.repository.CategoryRepository;

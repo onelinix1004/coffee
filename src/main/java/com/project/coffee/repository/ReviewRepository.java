@@ -1,6 +1,6 @@
 package com.project.coffee.repository;
 
-import com.project.coffee.entity.Review;
+import com.project.coffee.entity.store.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

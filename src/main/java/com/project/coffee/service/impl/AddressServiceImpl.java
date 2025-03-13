@@ -1,9 +1,9 @@
 package com.project.coffee.service.impl;
 
 import com.project.coffee.dto.AddressDTO;
-import com.project.coffee.entity.Address;
-import com.project.coffee.entity.Store;
-import com.project.coffee.entity.User;
+import com.project.coffee.entity.user.Address;
+import com.project.coffee.entity.store.Store;
+import com.project.coffee.entity.user.User;
 import com.project.coffee.exception.ResourceNotFoundException;
 import com.project.coffee.repository.AddressRepository;
 import com.project.coffee.repository.StoreRepository;

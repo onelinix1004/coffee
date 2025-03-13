@@ -1,5 +1,9 @@
-package com.project.coffee.entity;
+package com.project.coffee.entity.user;
 
+import com.project.coffee.entity.store.order.Order;
+import com.project.coffee.entity.store.Cart;
+import com.project.coffee.entity.store.Review;
+import com.project.coffee.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;

@@ -1,7 +1,7 @@
 package com.project.coffee.service.impl;
 
 import com.project.coffee.dto.OrderDTO;
-import com.project.coffee.entity.Order;
+import com.project.coffee.entity.store.order.Order;
 import com.project.coffee.exception.DuplicateResourceException;
 import com.project.coffee.exception.InvalidDataException;
 import com.project.coffee.exception.ResourceNotFoundException;

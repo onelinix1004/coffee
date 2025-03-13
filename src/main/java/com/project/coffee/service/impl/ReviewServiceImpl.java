@@ -1,10 +1,10 @@
 package com.project.coffee.service.impl;
 
 import com.project.coffee.dto.ReviewDTO;
-import com.project.coffee.entity.Product;
-import com.project.coffee.entity.Review;
-import com.project.coffee.entity.Store;
-import com.project.coffee.entity.User;
+import com.project.coffee.entity.store.Product;
+import com.project.coffee.entity.store.Review;
+import com.project.coffee.entity.store.Store;
+import com.project.coffee.entity.user.User;
 import com.project.coffee.exception.ResourceNotFoundException;
 import com.project.coffee.repository.ProductRepository;
 import com.project.coffee.repository.ReviewRepository;

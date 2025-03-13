@@ -1,4 +1,4 @@
-package com.project.coffee.entity;
+package com.project.coffee.entity.user;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -13,21 +13,27 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "tbl_permission")
-public class Permission {
+@Table(name = "tbl_role")
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "permission_id")
+    @Column(name = "role_id")
     Long id;
 
     String name;
     String description;
-    String resource;
-    String action;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
     boolean isActive;
 
-    @ManyToMany(mappedBy = "permissions")
-    Set<Role> roles;
+    @ManyToMany(mappedBy = "roles")
+    Set<User> users;
+
+    @ManyToMany
+    @JoinTable(
+            name = "role_permission",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "permission_id")
+    )
+    Set<Permission> permissions;
 }

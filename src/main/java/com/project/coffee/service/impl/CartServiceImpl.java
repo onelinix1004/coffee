@@ -1,10 +1,10 @@
 package com.project.coffee.service.impl;
 
 import com.project.coffee.dto.CartDTO;
-import com.project.coffee.entity.Cart;
-import com.project.coffee.entity.Product;
-import com.project.coffee.entity.Store;
-import com.project.coffee.entity.User;
+import com.project.coffee.entity.store.Cart;
+import com.project.coffee.entity.store.Product;
+import com.project.coffee.entity.store.Store;
+import com.project.coffee.entity.user.User;
 import com.project.coffee.exception.ResourceNotFoundException;
 import com.project.coffee.repository.CartRepository;
 import com.project.coffee.repository.ProductRepository;

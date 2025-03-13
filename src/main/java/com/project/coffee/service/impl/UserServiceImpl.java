@@ -1,12 +1,15 @@
 package com.project.coffee.service.impl;
 
 import com.project.coffee.dto.UserDTO;
-import com.project.coffee.entity.User;
+import com.project.coffee.entity.user.User;
 import com.project.coffee.exception.DuplicateResourceException;
 import com.project.coffee.exception.ResourceNotFoundException;
 import com.project.coffee.repository.UserRepository;
 import com.project.coffee.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -18,6 +21,8 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private Pageable firstPageWithTenElements = PageRequest.of(0, 10, Sort.by("name").descending());
+
 
     @Override
     public UserDTO createUser(UserDTO userDTO) {
@@ -42,7 +47,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDTO> getAllUsers() {
-        return userRepository.findAll().stream()
+        return userRepository.findAll(firstPageWithTenElements).stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }

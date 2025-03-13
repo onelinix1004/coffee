@@ -1,9 +1,9 @@
 package com.project.coffee.service.impl;
 
 import com.project.coffee.dto.OrderItemDTO;
-import com.project.coffee.entity.Order;
-import com.project.coffee.entity.OrderItem;
-import com.project.coffee.entity.Product;
+import com.project.coffee.entity.store.order.Order;
+import com.project.coffee.entity.store.order.OrderItem;
+import com.project.coffee.entity.store.Product;
 import com.project.coffee.exception.DuplicateResourceException;
 import com.project.coffee.exception.ResourceNotFoundException;
 import com.project.coffee.repository.OrderItemRepository;

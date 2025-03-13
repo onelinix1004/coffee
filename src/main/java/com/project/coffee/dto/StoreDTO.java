@@ -1,6 +1,6 @@
 package com.project.coffee.dto;
 
-import com.project.coffee.entity.Store;
+import com.project.coffee.entity.store.Store;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

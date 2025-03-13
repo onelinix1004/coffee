@@ -1,11 +1,11 @@
-package com.project.coffee.entity;
+package com.project.coffee.entity.store;
 
+import com.project.coffee.entity.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @Entity
@@ -13,18 +13,22 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "tbl_order")
-public class Order {
+@Table(name = "tbl_review")
+public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
+    @Column(name = "review_id")
     Long id;
 
-    String status;
-    LocalDateTime orderDate;
-    double totalAmount;
-    String paymentStatus;
-    String trackingNumber;
+    int rating;
+    String comment;
+    LocalDateTime reviewDate;
+    boolean isVerified;
+    String title;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id", nullable = false)
+    Product product;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -33,11 +37,4 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "store_id", nullable = false)
     Store store;
-
-    @ManyToOne
-    @JoinColumn(name = "shipping_address_id")
-    Address shippingAddress;
-
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    List<OrderItem> orderItems;
 }

@@ -1,6 +1,6 @@
 package com.project.coffee.repository;
 
-import com.project.coffee.entity.Order;
+import com.project.coffee.entity.store.order.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

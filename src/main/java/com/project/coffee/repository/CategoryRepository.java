@@ -1,6 +1,6 @@
 package com.project.coffee.repository;
 
-import com.project.coffee.entity.Category;
+import com.project.coffee.entity.store.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

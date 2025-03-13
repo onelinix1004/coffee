@@ -1,7 +1,7 @@
 package com.project.coffee.service.impl;
 
 import com.project.coffee.dto.ProductDTO;
-import com.project.coffee.entity.Product;
+import com.project.coffee.entity.store.Product;
 import com.project.coffee.exception.ResourceNotFoundException;
 import com.project.coffee.repository.ProductRepository;
 import com.project.coffee.service.ProductService;

@@ -1,4 +1,4 @@
-package com.project.coffee.entity;
+package com.project.coffee.entity.store;
 
 import jakarta.persistence.*;
 import lombok.*;

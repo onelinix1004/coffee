@@ -1,11 +1,11 @@
-package com.project.coffee.entity;
+package com.project.coffee.entity.user;
 
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -13,25 +13,21 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "tbl_store")
-public class Store {
+@Table(name = "tbl_permission")
+public class Permission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "store_id")
+    @Column(name = "permission_id")
     Long id;
 
     String name;
-    String location;
-    String phoneNumber;
-    String email;
+    String description;
+    String resource;
+    String action;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
     boolean isActive;
 
-    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
-    List<Product> products;
-
-    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
-    List<Inventory> inventories;
-
+    @ManyToMany(mappedBy = "permissions")
+    Set<Role> roles;
 }
